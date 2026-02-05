@@ -3,17 +3,17 @@
 <head>
 <title>Timescare Blog</title>
 
-<!-- Timescare Blogs style font (close alternative) -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4b5d67, #6c7a89); /* bluish grey */
+    background: linear-gradient(135deg, #3f5efb, #5f9cff); /* more bluish */
     color: white;
     text-align: center;
     padding: 40px;
+    overflow: hidden;
 }
 
 h1 {
@@ -23,6 +23,8 @@ h1 {
 }
 
 .container {
+    position: relative;
+    z-index: 2;
     background: rgba(0,0,0,0.25);
     padding: 30px;
     border-radius: 12px;
@@ -30,37 +32,36 @@ h1 {
     margin: auto;
 }
 
-a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 18px;
+a { color: #ffffff; text-decoration: none; font-size: 18px; }
+li { margin: 15px 0; }
+
+/* Bubble style */
+.bubble {
+    position: absolute;
+    bottom: -50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    animation: floatUp linear forwards;
 }
 
-li {
-    margin: 15px 0;
+@keyframes floatUp {
+    from { transform: translateY(0); }
+    to { transform: translateY(-120vh); }
 }
 </style>
-
 </head>
 
 <body>
 
+<div id="bubble-area"></div>
+
 <div class="container">
-<h1>Timescare Blogs </h1>
+<h1>Timescare Blogs</h1>
 <p>Click any blog to read:</p>
 
 <ul style="list-style:none; padding:0;">
     <li><a href="blog1.html">How to Focus on Studies</a></li>
-    <ul style="list-style:none; padding:0;">
-    <li><a href="blog1.html">How to Focus on Studies</a></li>
-
-    <li>
-    <a href="https://Timescare26.github.io/your-repo/blog1/index.html">
-    First Blog
-    </a>
-    </li>
-</ul>
-
 </ul>
 
 <p>
@@ -68,8 +69,15 @@ li {
 <a href="contact.html">Contact</a> |
 <a href="privacy.html">Privacy Policy</a>
 </p>
-
 </div>
 
-</body>
-</html>
+<script>
+const area = document.getElementById("bubble-area");
+
+function createBubble(){
+    const bubble = document.createElement("div");
+    bubble.classList.add("bubble");
+
+    let size = Math.random()*40 + 10;
+    bubble.style.width = size + "px";
+    bubble.style.height
