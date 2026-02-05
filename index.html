@@ -74,15 +74,16 @@ a { color: #ffffff; text-decoration: none; font-size: 5vw; }
 li { margin: 10px 0; }
 
 /* Bubble area */
-#bubble-area{
+#bubble-area {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    pointer-events: none;
+    z-index: 3;       /* bring above everything */
+    pointer-events: auto; /* allow clicking bubbles anywhere */
 }
+
 
 /* Bubble style */
 .bubble {
