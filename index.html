@@ -106,41 +106,55 @@ function createBubble(){
     bubble.style.animationDuration = (6 + Math.random()*6) + "s";
 
     bubble.onclick = () => {
-        burstToParticles(bubble);
+        burstHearts(bubble);
     };
 
     area.appendChild(bubble);
     setTimeout(()=>bubble.remove(),12000);
 }
 
-function burstToParticles(bubble){
+// Function to create tiny heart particles
+function burstHearts(bubble){
     let rect = bubble.getBoundingClientRect();
     bubble.remove();
 
     for(let i=0;i<15;i++){
         const p = document.createElement("div");
-        p.style.position="absolute";
-        p.style.width="6px";
-        p.style.height="6px";
-        p.style.background="white";
-        p.style.borderRadius="50%";
-        p.style.left=rect.left+"px";
-        p.style.top=rect.top+"px";
+        p.style.position = "absolute";
+        p.style.width = "10px";
+        p.style.height = "10px";
+        p.style.left = rect.left + "px";
+        p.style.top = rect.top + "px";
+        p.style.background = "transparent";
+        p.style.pointerEvents = "none";
+        p.style.zIndex = 2;
+
+        // create heart shape using CSS
+        p.style.clipPath = "polygon(50% 0%, 61% 11%, 75% 11%, 85% 25%, 85% 40%, 50% 100%, 15% 40%, 15% 25%, 25% 11%, 39% 11%)";
+
+        // random pink/red shade
+        const colors = ["#FF6B6B","#FF5EAA","#FF4D8F","#FF3B70","#FF1F4C"];
+        p.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+
         area.appendChild(p);
 
-        // move particles toward title text area
-        let targetX = window.innerWidth/2 + (Math.random()*120-60);
-        let targetY = 150 + (Math.random()*40-20);
+        // move in a random direction and fade
+        const dx = (Math.random()*200 - 100);
+        const dy = (Math.random()*-200 - 50); // upwards
 
         p.animate([
-            {transform:"translate(0,0)", opacity:1},
-            {transform:`translate(${targetX-rect.left}px,${targetY-rect.top}px)`, opacity:1}
-        ],{duration:1200, fill:"forwards"});
+            { transform: "translate(0,0)", opacity: 1 },
+            { transform: `translate(${dx}px,${dy}px)`, opacity: 0 }
+        ], { duration: 3500, easing: "ease-out", fill: "forwards" });
+
+        // remove particle after animation
+        setTimeout(()=>p.remove(),3500);
     }
 }
 
-setInterval(createBubble,600);
+setInterval(createBubble, 600);
 </script>
+
 
 
 </body>
