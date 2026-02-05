@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Blog</title>
+<title>My Study Blog</title>
+
+<!-- Stranger Things style font -->
+<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #1abc9c, #3498db);
+    background: linear-gradient(135deg, #4b5d67, #6c7a89); /* bluish grey */
     color: white;
     text-align: center;
-    padding-top: 50px;
+    padding: 40px;
+}
+
+h1 {
+    font-family: 'Creepster', cursive;
+    font-size: 60px;
+    letter-spacing: 3px;
+}
+
+.container {
+    background: rgba(0,0,0,0.25);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: auto;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+li {
+    margin: 15px 0;
 }
 </style>
 
@@ -18,8 +45,23 @@ body {
 
 <body>
 
-<h1>Welcome to My Study Blog</h1>
-<p>I will post blogs here daily.</p>
+<div class="container">
+<h1>My Study Blog</h1>
+<p>Click any blog to read:</p>
+
+<ul style="list-style:none; padding:0;">
+    <li><a href="blog1.html">How to Focus on Studies</a></li>
+    <li><a href="blog2.html">Second Blog Title</a></li>
+    <li><a href="blog3.html">Third Blog Title</a></li>
+</ul>
+
+<p>
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy.html">Privacy Policy</a>
+</p>
+
+</div>
 
 </body>
 </html>
