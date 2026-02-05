@@ -99,24 +99,49 @@ function createBubble(){
     const bubble = document.createElement("div");
     bubble.classList.add("bubble");
 
-    let size = Math.random()*40 + 15;
+    let size = Math.random()*30 + 15;
     bubble.style.width = size + "px";
     bubble.style.height = size + "px";
     bubble.style.left = Math.random()*100 + "vw";
     bubble.style.animationDuration = (6 + Math.random()*6) + "s";
 
     bubble.onclick = () => {
-        bubble.style.transform = "scale(1.6)";
-        bubble.style.opacity = "0";
-        setTimeout(()=>bubble.remove(),200);
+        burstToParticles(bubble);
     };
 
     area.appendChild(bubble);
     setTimeout(()=>bubble.remove(),12000);
 }
 
-setInterval(createBubble, 500);
+function burstToParticles(bubble){
+    let rect = bubble.getBoundingClientRect();
+    bubble.remove();
+
+    for(let i=0;i<15;i++){
+        const p = document.createElement("div");
+        p.style.position="absolute";
+        p.style.width="6px";
+        p.style.height="6px";
+        p.style.background="white";
+        p.style.borderRadius="50%";
+        p.style.left=rect.left+"px";
+        p.style.top=rect.top+"px";
+        area.appendChild(p);
+
+        // move particles toward title text area
+        let targetX = window.innerWidth/2 + (Math.random()*120-60);
+        let targetY = 150 + (Math.random()*40-20);
+
+        p.animate([
+            {transform:"translate(0,0)", opacity:1},
+            {transform:`translate(${targetX-rect.left}px,${targetY-rect.top}px)`, opacity:1}
+        ],{duration:1200, fill:"forwards"});
+    }
+}
+
+setInterval(createBubble,600);
 </script>
+
 
 </body>
 </html>
