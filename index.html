@@ -8,6 +8,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
 
 <style>
+    /* Heading and links default (mobile) */
+h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 10vw; /* scales with screen width */
+    letter-spacing: 5px;
+    animation: fadein 2s ease-in-out;
+}
+
+a {
+    font-size: 5vw;
+}
+
+/* For larger screens (PC) */
+@media screen and (min-width: 768px){
+    h1 {
+        font-size: 60px; /* smaller on desktop */
+    }
+    a {
+        font-size: 18px;
+    }
+}
+
 /* Body and general styles */
 body {
     margin: 0;
