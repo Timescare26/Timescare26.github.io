@@ -1,28 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Timescare Blog</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
 
 <style>
+/* Body and general styles */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #3f5efb, #5f9cff);
     color: white;
     text-align: center;
-    padding: 40px;
+    padding: 20px;
     overflow: hidden;
 }
 
+/* Title styling and fade-in */
 h1 {
     font-family: 'Cinzel Decorative', serif;
-    font-size: 70px;
+    font-size: 10vw; /* responsive font size */
     letter-spacing: 5px;
+    animation: fadein 2s ease-in-out;
 }
 
-/* bubble area */
+/* Fade-in animation */
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Container for blog links */
+.container {
+    position: relative;
+    z-index: 2;
+    background: rgba(0,0,0,0.25);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 90%; /* responsive width */
+    margin: 20px auto;
+}
+
+/* Blog links */
+a { color: #ffffff; text-decoration: none; font-size: 5vw; }
+li { margin: 10px 0; }
+
+/* Bubble area */
 #bubble-area{
     position: fixed;
     top: 0;
@@ -33,13 +59,14 @@ h1 {
     pointer-events: none;
 }
 
+/* Bubble style */
 .bubble {
     position: absolute;
     bottom: -60px;
     border-radius: 50%;
     background: rgba(255,255,255,0.4);
-    pointer-events: auto;
     cursor: pointer;
+    pointer-events: auto;
     animation: floatUp linear forwards;
 }
 
@@ -47,42 +74,26 @@ h1 {
     from { transform: translateY(0); }
     to { transform: translateY(-120vh); }
 }
-
-.container {
-    position: relative;
-    z-index: 2;
-    background: rgba(0,0,0,0.25);
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 700px;
-    margin: auto;
-}
-
-a { color: #ffffff; text-decoration: none; font-size: 18px; }
-li { margin: 15px 0; }
 </style>
 </head>
 
 <body>
 
+<!-- Bubble container -->
 <div id="bubble-area"></div>
 
+<!-- Main container -->
 <div class="container">
 <h1>Timescare Blogs</h1>
 <p>Click any blog to read:</p>
 
 <ul style="list-style:none; padding:0;">
     <li><a href="blog1.html">How to Focus on Studies</a></li>
-    <ul style="list-style:none; padding:0;">
-    <li><a href="blog1.html">How to Focus on Studies</a></li>
+    <a href="https://YourUsername.github.io/Timescare26/blog1.html/blog-file.html" target="_blank">
+    Blog Title from Another Branch
+</a>
 
-    <li>
-        <a href="https://Timescare26.github.io/Timescare26/blog1.html/blog2/index.html">
-        Second Blog
-        </a>
-    </li>
-</ul>
-
+ 
 </ul>
 
 <p>
@@ -93,13 +104,14 @@ li { margin: 15px 0; }
 </div>
 
 <script>
+// Bubble creation
 const area = document.getElementById("bubble-area");
 
 function createBubble(){
     const bubble = document.createElement("div");
     bubble.classList.add("bubble");
 
-    let size = Math.random()*30 + 15;
+    let size = Math.random()*25 + 15; // smaller for mobile
     bubble.style.width = size + "px";
     bubble.style.height = size + "px";
     bubble.style.left = Math.random()*100 + "vw";
@@ -113,23 +125,23 @@ function createBubble(){
     setTimeout(()=>bubble.remove(),12000);
 }
 
-// Function to create tiny heart particles
+// Burst bubbles into tiny hearts
 function burstHearts(bubble){
     let rect = bubble.getBoundingClientRect();
     bubble.remove();
 
-    for(let i=0;i<15;i++){
+    for(let i=0;i<12;i++){ // fewer particles for mobile
         const p = document.createElement("div");
         p.style.position = "absolute";
-        p.style.width = "10px";
-        p.style.height = "10px";
+        p.style.width = "8px";
+        p.style.height = "8px";
         p.style.left = rect.left + "px";
         p.style.top = rect.top + "px";
         p.style.background = "transparent";
         p.style.pointerEvents = "none";
         p.style.zIndex = 2;
 
-        // create heart shape using CSS
+        // heart shape
         p.style.clipPath = "polygon(50% 0%, 61% 11%, 75% 11%, 85% 25%, 85% 40%, 50% 100%, 15% 40%, 15% 25%, 25% 11%, 39% 11%)";
 
         // random pink/red shade
@@ -138,24 +150,21 @@ function burstHearts(bubble){
 
         area.appendChild(p);
 
-        // move in a random direction and fade
-        const dx = (Math.random()*200 - 100);
-        const dy = (Math.random()*-200 - 50); // upwards
+        const dx = (Math.random()*150 - 75);
+        const dy = (Math.random()*-150 - 50);
 
         p.animate([
             { transform: "translate(0,0)", opacity: 1 },
             { transform: `translate(${dx}px,${dy}px)`, opacity: 0 }
         ], { duration: 3500, easing: "ease-out", fill: "forwards" });
 
-        // remove particle after animation
         setTimeout(()=>p.remove(),3500);
     }
 }
 
-setInterval(createBubble, 600);
+// Create bubbles periodically
+setInterval(createBubble, 700);
 </script>
-
-
 
 </body>
 </html>
